@@ -510,19 +510,23 @@ bool BridgeManager::BeginSession(void)
 
 	if (!SendPacket(&beginSessionPacket))
 	{
-		Interface::PrintError("Failed to begin session!\n");
+		Interface::PrintError("Failed to send request to begin session!\n");
 		return (false);
 	}
 
 	SessionSetupResponse beginSessionResponse;
 	if (!ReceivePacket(&beginSessionResponse))
+	{
+		Interface::PrintError("Failed to response to begin session request!\n");
 		return (false);
+	}
 
 	unsigned int deviceDefaultPacketSize = beginSessionResponse.GetResult();
 
 	Interface::Print("\nSome devices may take up to 2 minutes to respond.\nPlease be patient!\n\n");
 	Sleep(3000); // Give the user time to read the message.
 
+	/*
 	if (deviceDefaultPacketSize != 0) // 0 means changing the packet size is not supported.
 	{
 		fileTransferSequenceTimeout = 120000; // 2 minutes!
@@ -540,14 +544,18 @@ bool BridgeManager::BeginSession(void)
 		SessionSetupResponse filePartSizeResponse;
 
 		if (!ReceivePacket(&filePartSizeResponse))
+		{
+			Interface::PrintError("Failed to receive response to file part size request!\n"); 
 			return (false);
+		}
 
 		if (filePartSizeResponse.GetResult() != 0)
 		{
 			Interface::PrintError("Unexpected file part size response!\nExpected: 0\nReceived: %d\n", filePartSizeResponse.GetResult());
 			return (false);
 		}
-	}
+	}  
+	*/
 
 	Interface::Print("Session begun.\n\n");
 	return (true);
