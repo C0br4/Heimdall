@@ -702,7 +702,7 @@ bool BridgeManager::SendPacket(OutboundPacket *packet, int timeout, int emptyTra
 	{
 		if (!SendBulkTransfer(nullptr, 0, kDefaultTimeoutEmptyTransfer, false) && verbose)
 		{
-			Interface::PrintWarning("Empty bulk transfer before sending packet failed. Continuing anyway...\n");
+			Interface::PrintWarning("Attempt to send empty bulk transfer before sending packet failed. Continuing anyway...\n");
 		}
 	}
 
@@ -713,7 +713,7 @@ bool BridgeManager::SendPacket(OutboundPacket *packet, int timeout, int emptyTra
 	{
 		if (!SendBulkTransfer(nullptr, 0, kDefaultTimeoutEmptyTransfer, false) && verbose)
 		{
-			Interface::PrintWarning("Empty bulk transfer after sending packet failed. Continuing anyway...\n");
+			Interface::PrintWarning("Attempt to send empty bulk transfer after sending packet failed. Continuing anyway...\n");
 		}
 	}
 
@@ -726,7 +726,7 @@ bool BridgeManager::ReceivePacket(InboundPacket *packet, int timeout, int emptyT
 	{
 		if (ReceiveBulkTransfer(nullptr, 0, kDefaultTimeoutEmptyTransfer, false) < 0 && verbose)
 		{
-			Interface::PrintWarning("Empty bulk transfer before receiving packet failed. Continuing anyway...\n");
+			Interface::PrintWarning("Attmpt to receive empty bulk transfer before receiving packet failed. Continuing anyway...\n");
 		}
 	}
 
@@ -754,7 +754,7 @@ bool BridgeManager::ReceivePacket(InboundPacket *packet, int timeout, int emptyT
 	{
 		if (ReceiveBulkTransfer(nullptr, 0, kDefaultTimeoutEmptyTransfer, false) < 0 && verbose)
 		{
-			Interface::PrintWarning("Empty bulk transfer after receiving packet failed. Continuing anyway...\n");
+			Interface::PrintWarning("Attempt to receive empty bulk transfer after receiving packet failed. Continuing anyway...\n");
 		}
 	}
 
